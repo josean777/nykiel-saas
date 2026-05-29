@@ -91,6 +91,9 @@ export default function Home() {
             <a href="#especialidades" className="text-gray-600 hover:text-emerald-600 transition font-medium">
               Especialidades
             </a>
+            <button onClick={() => setLocation("/team")} className="text-gray-600 hover:text-emerald-600 transition font-medium">
+              Equipe
+            </button>
             <a href="#sobre" className="text-gray-600 hover:text-emerald-600 transition font-medium">
               Sobre
             </a>

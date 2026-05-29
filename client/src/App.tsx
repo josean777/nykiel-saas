@@ -6,6 +6,7 @@ import { ThemeProvider } from "./contexts/ThemeContext";
 import Home from "./pages/Home";
 import Login from "./pages/Login";
 import Register from "./pages/Register";
+import Team from "./pages/Team";
 import Booking from "./pages/Booking";
 import PatientDashboard from "./pages/PatientDashboard";
 import ProfessionalDashboard from "./pages/ProfessionalDashboard";
@@ -21,6 +22,7 @@ function App() {
             <Route path="/" component={Home} />
             <Route path="/login" component={Login} />
             <Route path="/register" component={Register} />
+            <Route path="/team" component={Team} />
             <Route path="/booking" component={Booking} />
             <Route path="/dashboard/patient" component={PatientDashboard} />
             <Route path="/dashboard/professional" component={ProfessionalDashboard} />
