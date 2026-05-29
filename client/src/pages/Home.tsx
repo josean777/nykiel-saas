@@ -83,11 +83,11 @@ export default function Home() {
               Contato
             </a>
           </nav>
-          <div className="flex items-center gap-3">
+          <div className="flex items-center gap-2 sm:gap-3">
             <Button 
               variant="outline" 
               onClick={() => setLocation("/register")} 
-              className="hidden sm:inline-flex border-gray-300 text-gray-700 hover:bg-gray-50 text-sm h-9 px-6"
+              className="border-gray-300 text-gray-700 hover:bg-gray-50 text-xs sm:text-sm h-8 sm:h-9 px-3 sm:px-6"
             >
               Cadastro
             </Button>
