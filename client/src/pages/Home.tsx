@@ -83,17 +83,17 @@ export default function Home() {
               Contato
             </a>
           </nav>
-          <div className="flex items-center gap-2">
+          <div className="flex items-center gap-3">
             <Button 
               variant="outline" 
               onClick={() => setLocation("/register")} 
-              className="hidden sm:inline-flex border-gray-300 text-gray-700 hover:bg-gray-50 text-sm h-9"
+              className="hidden sm:inline-flex border-gray-300 text-gray-700 hover:bg-gray-50 text-sm h-9 px-6"
             >
               Cadastro
             </Button>
             <Button 
               onClick={() => setLocation("/login")} 
-              className="text-white text-sm h-9 px-6"
+              className="text-white text-sm h-9 px-6 font-medium"
               style={{ backgroundColor: "#D4A574" }}
             >
               Entrar
