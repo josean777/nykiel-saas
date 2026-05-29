@@ -13,16 +13,14 @@ async function startServer() {
   // Parse JSON
   app.use(express.json());
 
-  // Serve static files from dist/public
-  const staticPath = path.resolve(__dirname, "..", "dist", "public");
+  // Serve static files from dist/public (where Vite outputs the frontend)
+  const staticPath = path.resolve(__dirname, "public");
   app.use(express.static(staticPath));
-
-  // API routes (if any)
-  // app.use("/api", apiRouter);
 
   // Handle client-side routing - serve index.html for all routes
   app.get("*", (_req, res) => {
-    res.sendFile(path.join(staticPath, "index.html"));
+    const indexPath = path.join(staticPath, "index.html");
+    res.sendFile(indexPath);
   });
 
   const port = process.env.PORT || 3000;
