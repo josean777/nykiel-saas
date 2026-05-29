@@ -80,6 +80,7 @@ export default function Home() {
             <a href="#contato" className="text-gray-600 hover:text-gray-900">
               Contato
             </a>
+            <Button variant="outline" onClick={() => setLocation("/register")}>Cadastro</Button>
             <Button onClick={() => setLocation("/login")}>Entrar</Button>
           </nav>
           <div className="md:hidden">
