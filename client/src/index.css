@@ -1,0 +1,323 @@
+@import "tailwindcss";
+@import "tw-animate-css";
+
+@custom-variant dark (&:is(.dark *));
+
+@theme inline {
+  --radius-sm: calc(var(--radius) - 4px);
+  --radius-md: calc(var(--radius) - 2px);
+  --radius-lg: var(--radius);
+  --radius-xl: calc(var(--radius) + 4px);
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --color-card: var(--card);
+  --color-card-foreground: var(--card-foreground);
+  --color-popover: var(--popover);
+  --color-popover-foreground: var(--popover-foreground);
+  --color-primary: var(--primary);
+  --color-primary-foreground: var(--primary-foreground);
+  --color-secondary: var(--secondary);
+  --color-secondary-foreground: var(--secondary-foreground);
+  --color-muted: var(--muted);
+  --color-muted-foreground: var(--muted-foreground);
+  --color-accent: var(--accent);
+  --color-accent-foreground: var(--accent-foreground);
+  --color-destructive: var(--destructive);
+  --color-destructive-foreground: var(--destructive-foreground);
+  --color-border: var(--border);
+  --color-input: var(--input);
+  --color-ring: var(--ring);
+  --color-chart-1: var(--chart-1);
+  --color-chart-2: var(--chart-2);
+  --color-chart-3: var(--chart-3);
+  --color-chart-4: var(--chart-4);
+  --color-chart-5: var(--chart-5);
+  --color-sidebar: var(--sidebar);
+  --color-sidebar-foreground: var(--sidebar-foreground);
+  --color-sidebar-primary: var(--sidebar-primary);
+  --color-sidebar-primary-foreground: var(--sidebar-primary-foreground);
+  --color-sidebar-accent: var(--sidebar-accent);
+  --color-sidebar-accent-foreground: var(--sidebar-accent-foreground);
+  --color-sidebar-border: var(--sidebar-border);
+  --color-sidebar-ring: var(--sidebar-ring);
+}
+
+:root {
+  /* Premium Luxury Palette - Essência */
+  --primary: #D4AF8C; /* Champagne Gold */
+  --primary-foreground: #F5F1ED; /* Ivory */
+  --sidebar-primary: #D4AF8C;
+  --sidebar-primary-foreground: #F5F1ED;
+  --chart-1: #D4AF8C;
+  --chart-2: #E8DCC8;
+  --chart-3: #C9C5C0;
+  --chart-4: #2A2A2A;
+  --chart-5: #1A1A1A;
+  --radius: 0.5rem;
+  
+  /* Semantic Colors - Light Theme */
+  --background: #F5F1ED; /* Ivory */
+  --foreground: #2A2A2A; /* Charcoal */
+  --card: #FEFDFB; /* Off-white */
+  --card-foreground: #2A2A2A;
+  --popover: #FEFDFB;
+  --popover-foreground: #2A2A2A;
+  --secondary: #E8DCC8; /* Warm Beige */
+  --secondary-foreground: #2A2A2A;
+  --muted: #C9C5C0; /* Soft Gray */
+  --muted-foreground: #6B6B6B;
+  --accent: #D4AF8C; /* Champagne Gold */
+  --accent-foreground: #FEFDFB;
+  --destructive: #DC2626;
+  --destructive-foreground: #FEFDFB;
+  --border: #E8DCC8;
+  --input: #FEFDFB;
+  --ring: #D4AF8C;
+  --sidebar: #F5F1ED;
+  --sidebar-foreground: #2A2A2A;
+  --sidebar-accent: #D4AF8C;
+  --sidebar-accent-foreground: #FEFDFB;
+  --sidebar-border: #E8DCC8;
+  --sidebar-ring: #D4AF8C;
+}
+
+.dark {
+  /* Dark mode - keeping light theme for this luxury brand */
+  --primary: #D4AF8C;
+  --primary-foreground: #F5F1ED;
+  --sidebar-primary: #D4AF8C;
+  --sidebar-primary-foreground: #F5F1ED;
+  --background: #F5F1ED;
+  --foreground: #2A2A2A;
+  --card: #FEFDFB;
+  --card-foreground: #2A2A2A;
+  --popover: #FEFDFB;
+  --popover-foreground: #2A2A2A;
+  --secondary: #E8DCC8;
+  --secondary-foreground: #2A2A2A;
+  --muted: #C9C5C0;
+  --muted-foreground: #6B6B6B;
+  --accent: #D4AF8C;
+  --accent-foreground: #FEFDFB;
+  --destructive: #DC2626;
+  --destructive-foreground: #FEFDFB;
+  --border: #E8DCC8;
+  --input: #FEFDFB;
+  --ring: #D4AF8C;
+  --chart-1: #D4AF8C;
+  --chart-2: #E8DCC8;
+  --chart-3: #C9C5C0;
+  --chart-4: #2A2A2A;
+  --chart-5: #1A1A1A;
+  --sidebar: #F5F1ED;
+  --sidebar-foreground: #2A2A2A;
+  --sidebar-accent: #D4AF8C;
+  --sidebar-accent-foreground: #FEFDFB;
+  --sidebar-border: #E8DCC8;
+  --sidebar-ring: #D4AF8C;
+}
+
+@layer base {
+  * {
+    @apply border-border outline-ring/50;
+    box-sizing: border-box;
+  }
+  
+  html {
+    scroll-behavior: smooth;
+    overflow-x: hidden;
+  }
+  
+  body {
+    @apply bg-background text-foreground;
+    font-family: 'Satoshi', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+    overflow-x: hidden;
+    width: 100%;
+  }
+  
+  h1, h2, h3, h4, h5, h6 {
+    font-family: 'Crimson Text', serif;
+    font-weight: 600;
+    letter-spacing: -0.02em;
+  }
+  
+  h1 { @apply text-5xl md:text-6xl lg:text-7xl; }
+  h2 { @apply text-4xl md:text-5xl; }
+  h3 { @apply text-3xl md:text-4xl; }
+  h4 { @apply text-2xl md:text-3xl; }
+  h5 { @apply text-xl md:text-2xl; }
+  h6 { @apply text-lg md:text-xl; }
+
+  button:not(:disabled),
+  [role="button"]:not([aria-disabled="true"]),
+  [type="button"]:not(:disabled),
+  [type="submit"]:not(:disabled),
+  [type="reset"]:not(:disabled),
+  a[href],
+  select:not(:disabled),
+  input[type="checkbox"]:not(:disabled),
+  input[type="radio"]:not(:disabled) {
+    @apply cursor-pointer;
+  }
+}
+
+/* Premium Animation Utilities */
+@layer utilities {
+  @keyframes fade-in {
+    from {
+      opacity: 0;
+    }
+    to {
+      opacity: 1;
+    }
+  }
+  
+  @keyframes slide-up {
+    from {
+      opacity: 0;
+      transform: translateY(20px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+  
+  @keyframes slide-down {
+    from {
+      opacity: 0;
+      transform: translateY(-20px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+  
+  @keyframes float {
+    0%, 100% {
+      transform: translateY(0px);
+    }
+    50% {
+      transform: translateY(-10px);
+    }
+  }
+  
+  @keyframes glow {
+    0%, 100% {
+      box-shadow: 0 0 20px rgba(212, 175, 140, 0.3);
+    }
+    50% {
+      box-shadow: 0 0 40px rgba(212, 175, 140, 0.6);
+    }
+  }
+  
+  .animate-fade-in {
+    animation: fade-in 0.5s ease-out;
+  }
+  
+  .animate-slide-up {
+    animation: slide-up 0.6s ease-out;
+  }
+  
+  .animate-slide-down {
+    animation: slide-down 0.6s ease-out;
+  }
+  
+  .animate-float {
+    animation: float 4s ease-in-out infinite;
+  }
+  
+  .animate-glow {
+    animation: glow 3s ease-in-out infinite;
+  }
+  
+  .transition-premium {
+    @apply transition-all duration-300 ease-out;
+  }
+  
+  .transition-smooth {
+    @apply transition-all duration-500;
+  }
+}
+
+@layer components {
+  /**
+   * Custom container utility that centers content and adds responsive padding.
+   *
+   * This overrides Tailwind's default container behavior to:
+   * - Auto-center content (mx-auto)
+   * - Add responsive horizontal padding
+   * - Set max-width for large screens
+   *
+   * Usage: <div className="container">...</div>
+   *
+   * For custom widths, use max-w-* utilities directly:
+   * <div className="max-w-6xl mx-auto px-4">...</div>
+   */
+  .container {
+    width: 100%;
+    margin-left: auto;
+    margin-right: auto;
+    padding-left: 1rem; /* 16px - mobile padding */
+    padding-right: 1rem;
+    box-sizing: border-box;
+    overflow-x: hidden;
+  }
+
+  .flex {
+    min-height: 0;
+    min-width: 0;
+  }
+
+  /* Typography Utilities */
+  .font-display {
+    font-family: 'Crimson Text', serif;
+    font-weight: 600;
+    letter-spacing: -0.02em;
+  }
+  
+  .font-body {
+    font-family: 'Satoshi', sans-serif;
+    font-weight: 400;
+    letter-spacing: 0;
+  }
+  
+  .font-light {
+    font-weight: 300;
+  }
+
+  @media (min-width: 640px) {
+    .container {
+      padding-left: 1.5rem; /* 24px - tablet padding */
+      padding-right: 1.5rem;
+    }
+  }
+
+  @media (min-width: 1024px) {
+    .container {
+      padding-left: 2rem; /* 32px - desktop padding */
+      padding-right: 2rem;
+      max-width: 1280px; /* Standard content width */
+    }
+  }
+  
+  /* Luxury Components */
+  .glass-effect {
+    background: rgba(255, 255, 255, 0.7);
+    backdrop-filter: blur(10px);
+    border: 1px solid rgba(212, 175, 140, 0.2);
+  }
+  
+  .gold-border {
+    border-color: #D4AF8C;
+  }
+  
+  .shadow-luxury {
+    box-shadow: 0 10px 40px rgba(0, 0, 0, 0.08);
+  }
+  
+  .shadow-luxury-lg {
+    box-shadow: 0 20px 60px rgba(0, 0, 0, 0.12);
+  }
+}
