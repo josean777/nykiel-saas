@@ -101,7 +101,7 @@ export default function Home() {
             Cuidamos de você em todas as fases da vida.
           </p>
           <div className="flex flex-col sm:flex-row gap-4 justify-center">
-            <Button size="lg" onClick={() => setLocation("/login")}>
+            <Button size="lg" onClick={() => setLocation("/booking")}>
               Agendar Consulta <ArrowRight className="w-4 h-4 ml-2" />
             </Button>
             <Button size="lg" variant="outline">
@@ -153,7 +153,7 @@ export default function Home() {
                   </li>
                 ))}
               </ul>
-              <Button className="mt-8" onClick={() => setLocation("/login")}>
+              <Button className="mt-8" onClick={() => setLocation("/booking")}>
                 Comece Agora
               </Button>
             </div>
