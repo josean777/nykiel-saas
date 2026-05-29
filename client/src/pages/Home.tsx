@@ -14,6 +14,9 @@ import {
   Users,
   ArrowRight,
   CheckCircle,
+  Shield,
+  Zap,
+  Award,
 } from "lucide-react";
 
 export default function Home() {
@@ -24,88 +27,125 @@ export default function Home() {
       icon: Smile,
       title: "Odontologia",
       description: "Limpeza, clareamento, implantes, harmonização e muito mais",
+      color: "from-blue-500/10 to-blue-600/5 border-blue-500/20",
+      iconColor: "text-blue-400",
     },
     {
       icon: Stethoscope,
       title: "Medicina Geral",
       description: "Consultas e acompanhamento com profissionais experientes",
+      color: "from-emerald-500/10 to-emerald-600/5 border-emerald-500/20",
+      iconColor: "text-emerald-400",
     },
     {
       icon: Apple,
       title: "Nutrição",
       description: "Planejamento nutricional personalizado",
+      color: "from-orange-500/10 to-orange-600/5 border-orange-500/20",
+      iconColor: "text-orange-400",
     },
     {
       icon: Dumbbell,
       title: "Fisioterapia",
       description: "Reabilitação e prevenção de lesões",
+      color: "from-purple-500/10 to-purple-600/5 border-purple-500/20",
+      iconColor: "text-purple-400",
     },
     {
       icon: Brain,
       title: "Psicologia",
       description: "Atendimento psicológico e bem-estar mental",
+      color: "from-pink-500/10 to-pink-600/5 border-pink-500/20",
+      iconColor: "text-pink-400",
     },
     {
       icon: Sparkles,
       title: "Estética",
       description: "Procedimentos estéticos avançados",
+      color: "from-amber-500/10 to-amber-600/5 border-amber-500/20",
+      iconColor: "text-amber-400",
     },
   ];
 
   const benefits = [
-    "Agendamento online 24/7",
-    "Prontuário eletrônico seguro",
-    "Lembretes automáticos",
-    "Múltiplos profissionais especializados",
-    "Atendimento humanizado",
-    "Localização privilegiada",
+    { icon: Shield, text: "Agendamento online 24/7" },
+    { icon: Zap, text: "Prontuário eletrônico seguro" },
+    { icon: CheckCircle, text: "Lembretes automáticos" },
+    { icon: Users, text: "Múltiplos profissionais especializados" },
+    { icon: Award, text: "Atendimento humanizado" },
+    { icon: MapPin, text: "Localização privilegiada" },
   ];
 
   return (
     <div className="min-h-screen bg-white">
       {/* Header */}
-      <header className="sticky top-0 z-50 bg-white border-b border-gray-200">
+      <header className="sticky top-0 z-50 bg-white/80 backdrop-blur border-b border-gray-200">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-16 flex items-center justify-between">
           <div className="flex items-center gap-2">
-            <Stethoscope className="w-8 h-8 text-indigo-600" />
+            <div className="w-10 h-10 bg-gradient-to-br from-emerald-500 to-emerald-600 rounded-lg flex items-center justify-center">
+              <Stethoscope className="w-6 h-6 text-white" />
+            </div>
             <span className="font-bold text-xl text-gray-900">Nykiel</span>
           </div>
           <nav className="hidden md:flex items-center gap-8">
-            <a href="#especialidades" className="text-gray-600 hover:text-gray-900">
+            <a href="#especialidades" className="text-gray-600 hover:text-emerald-600 transition font-medium">
               Especialidades
             </a>
-            <a href="#sobre" className="text-gray-600 hover:text-gray-900">
+            <a href="#sobre" className="text-gray-600 hover:text-emerald-600 transition font-medium">
               Sobre
             </a>
-            <a href="#contato" className="text-gray-600 hover:text-gray-900">
+            <a href="#contato" className="text-gray-600 hover:text-emerald-600 transition font-medium">
               Contato
             </a>
-            <Button variant="outline" onClick={() => setLocation("/register")}>Cadastro</Button>
-            <Button onClick={() => setLocation("/login")}>Entrar</Button>
-          </nav>
-          <div className="md:hidden">
-            <Button onClick={() => setLocation("/login")} size="sm">
+            <Button variant="outline" onClick={() => setLocation("/register")} className="border-emerald-200 text-emerald-600 hover:bg-emerald-50">
+              Cadastro
+            </Button>
+            <Button onClick={() => setLocation("/login")} className="bg-emerald-600 hover:bg-emerald-700">
               Entrar
             </Button>
+          </nav>
+          <div className="md:hidden flex gap-2">
+            <Button variant="outline" size="sm" onClick={() => setLocation("/register")}>Cadastro</Button>
+            <Button size="sm" onClick={() => setLocation("/login")}>Entrar</Button>
           </div>
         </div>
       </header>
 
       {/* Hero Section */}
-      <section className="bg-gradient-to-br from-indigo-50 via-white to-blue-50 py-20 px-4">
-        <div className="max-w-7xl mx-auto text-center">
-          <h1 className="text-4xl md:text-6xl font-bold text-gray-900 mb-6">
-            Cuidado Completo em Um Só Lugar
+      <section className="relative bg-gradient-to-br from-slate-900 via-emerald-900 to-slate-900 py-32 px-4 overflow-hidden">
+        {/* Decorative elements */}
+        <div className="absolute inset-0 overflow-hidden">
+          <div className="absolute -top-40 -right-40 w-80 h-80 bg-emerald-500/10 rounded-full blur-3xl"></div>
+          <div className="absolute -bottom-40 -left-40 w-80 h-80 bg-emerald-500/5 rounded-full blur-3xl"></div>
+        </div>
+
+        <div className="max-w-7xl mx-auto text-center relative z-10">
+          <div className="inline-block mb-6 px-4 py-2 bg-emerald-500/10 border border-emerald-500/20 rounded-full">
+            <p className="text-emerald-400 font-semibold text-sm">Bem-vindo à Nykiel Policlínica</p>
+          </div>
+          <h1 className="text-5xl md:text-7xl font-bold text-white mb-6 leading-tight">
+            Cuidado Completo <br />
+            <span className="bg-gradient-to-r from-emerald-400 to-emerald-300 bg-clip-text text-transparent">
+              em Um Só Lugar
+            </span>
           </h1>
-          <p className="text-xl text-gray-600 mb-8 max-w-2xl mx-auto">
-            Nykiel Policlínica oferece atendimento multiprofissional com prevenção, acolhimento e qualidade.
-            Cuidamos de você em todas as fases da vida.
+          <p className="text-xl text-slate-300 mb-8 max-w-3xl mx-auto leading-relaxed">
+            Nykiel Policlínica oferece atendimento multiprofissional com prevenção, acolhimento e qualidade. 
+            Cuidamos de você em todas as fases da vida com tecnologia e humanidade.
           </p>
           <div className="flex flex-col sm:flex-row gap-4 justify-center">
-            <Button size="lg" onClick={() => setLocation("/booking")}>
-              Agendar Consulta <ArrowRight className="w-4 h-4 ml-2" />
+            <Button 
+              size="lg" 
+              onClick={() => setLocation("/booking")}
+              className="bg-gradient-to-r from-emerald-500 to-emerald-600 hover:from-emerald-600 hover:to-emerald-700 text-white font-semibold px-8 py-6 text-lg rounded-xl shadow-lg hover:shadow-xl transition-all"
+            >
+              Agendar Consulta <ArrowRight className="w-5 h-5 ml-2" />
             </Button>
-            <Button size="lg" variant="outline">
+            <Button 
+              size="lg" 
+              variant="outline"
+              className="border-emerald-400 text-emerald-400 hover:bg-emerald-500/10 font-semibold px-8 py-6 text-lg rounded-xl"
+            >
               Saiba Mais
             </Button>
           </div>
@@ -113,22 +153,27 @@ export default function Home() {
       </section>
 
       {/* Especialidades */}
-      <section id="especialidades" className="py-20 px-4 bg-gray-50">
+      <section id="especialidades" className="py-24 px-4 bg-white">
         <div className="max-w-7xl mx-auto">
-          <h2 className="text-3xl font-bold text-gray-900 mb-4 text-center">Nossas Especialidades</h2>
-          <p className="text-gray-600 text-center mb-12 max-w-2xl mx-auto">
-            Equipe multidisciplinar pronta para atender suas necessidades de saúde
-          </p>
-          <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
+          <div className="text-center mb-16">
+            <h2 className="text-4xl md:text-5xl font-bold text-gray-900 mb-4">Nossas Especialidades</h2>
+            <p className="text-xl text-gray-600 max-w-2xl mx-auto">
+              Equipe multidisciplinar pronta para atender suas necessidades de saúde com excelência
+            </p>
+          </div>
+          <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
             {specialties.map((specialty, idx) => {
               const Icon = specialty.icon;
               return (
-                <Card key={idx} className="hover:shadow-lg transition-shadow">
+                <Card 
+                  key={idx} 
+                  className={`bg-gradient-to-br ${specialty.color} border rounded-2xl hover:shadow-xl transition-all duration-300 hover:-translate-y-1 cursor-pointer`}
+                >
                   <CardHeader>
-                    <div className="w-12 h-12 bg-indigo-100 rounded-lg flex items-center justify-center mb-4">
-                      <Icon className="w-6 h-6 text-indigo-600" />
+                    <div className={`w-14 h-14 bg-gradient-to-br ${specialty.color} rounded-xl flex items-center justify-center mb-4`}>
+                      <Icon className={`w-7 h-7 ${specialty.iconColor}`} />
                     </div>
-                    <CardTitle>{specialty.title}</CardTitle>
+                    <CardTitle className="text-gray-900">{specialty.title}</CardTitle>
                   </CardHeader>
                   <CardContent>
                     <p className="text-gray-600">{specialty.description}</p>
@@ -141,32 +186,46 @@ export default function Home() {
       </section>
 
       {/* Benefícios */}
-      <section id="sobre" className="py-20 px-4">
+      <section id="sobre" className="py-24 px-4 bg-gradient-to-br from-gray-50 to-white">
         <div className="max-w-7xl mx-auto">
-          <div className="grid md:grid-cols-2 gap-12 items-center">
+          <div className="grid md:grid-cols-2 gap-16 items-center">
             <div>
-              <h2 className="text-3xl font-bold text-gray-900 mb-6">Por Que Escolher Nykiel?</h2>
-              <ul className="space-y-4">
-                {benefits.map((benefit, idx) => (
-                  <li key={idx} className="flex items-center gap-3">
-                    <CheckCircle className="w-5 h-5 text-green-600 flex-shrink-0" />
-                    <span className="text-gray-700">{benefit}</span>
-                  </li>
-                ))}
-              </ul>
-              <Button className="mt-8" onClick={() => setLocation("/booking")}>
-                Comece Agora
+              <h2 className="text-4xl md:text-5xl font-bold text-gray-900 mb-8">Por Que Escolher Nykiel?</h2>
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
+                {benefits.map((benefit, idx) => {
+                  const Icon = benefit.icon;
+                  return (
+                    <div key={idx} className="flex items-start gap-4">
+                      <div className="w-10 h-10 bg-emerald-100 rounded-lg flex items-center justify-center flex-shrink-0 mt-1">
+                        <Icon className="w-5 h-5 text-emerald-600" />
+                      </div>
+                      <span className="text-gray-700 font-medium">{benefit.text}</span>
+                    </div>
+                  );
+                })}
+              </div>
+              <Button 
+                className="mt-10 bg-gradient-to-r from-emerald-500 to-emerald-600 hover:from-emerald-600 hover:to-emerald-700 text-white font-semibold px-8 py-6 text-lg rounded-xl shadow-lg"
+                onClick={() => setLocation("/booking")}
+              >
+                Comece Agora <ArrowRight className="w-5 h-5 ml-2" />
               </Button>
             </div>
-            <div className="bg-gradient-to-br from-indigo-100 to-blue-100 rounded-lg h-96 flex items-center justify-center">
-              <Users className="w-32 h-32 text-indigo-300" />
+            <div className="relative">
+              <div className="absolute inset-0 bg-gradient-to-br from-emerald-400 to-emerald-600 rounded-3xl blur-2xl opacity-20"></div>
+              <div className="relative bg-gradient-to-br from-emerald-50 to-emerald-100 rounded-3xl h-96 flex items-center justify-center border border-emerald-200">
+                <div className="text-center">
+                  <Users className="w-24 h-24 text-emerald-300 mx-auto mb-4" />
+                  <p className="text-emerald-700 font-semibold">Equipe de Profissionais Experientes</p>
+                </div>
+              </div>
             </div>
           </div>
         </div>
       </section>
 
       {/* Contato */}
-      <section id="contato" className="py-20 px-4 bg-gradient-to-br from-slate-900 via-slate-800 to-slate-900">
+      <section id="contato" className="py-24 px-4 bg-gradient-to-br from-slate-900 via-slate-800 to-slate-900">
         <div className="max-w-7xl mx-auto">
           <div className="text-center mb-16">
             <h2 className="text-4xl md:text-5xl font-bold text-white mb-4">Vamos Conversar?</h2>
@@ -226,7 +285,9 @@ export default function Home() {
           <div className="grid md:grid-cols-4 gap-8 mb-8">
             <div>
               <div className="flex items-center gap-2 mb-4">
-                <Stethoscope className="w-6 h-6 text-emerald-400" />
+                <div className="w-8 h-8 bg-gradient-to-br from-emerald-500 to-emerald-600 rounded-lg flex items-center justify-center">
+                  <Stethoscope className="w-5 h-5 text-white" />
+                </div>
                 <span className="font-bold text-white">Nykiel</span>
               </div>
               <p className="text-sm text-slate-500">Cuidado completo em um só lugar</p>
