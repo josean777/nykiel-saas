@@ -3,7 +3,8 @@ import { useLocation } from "wouter";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
-import { Calendar, FileText, CreditCard, LogOut, Plus, Clock } from "lucide-react";
+import { Calendar, FileText, CreditCard, LogOut, Plus, Clock, Download, X, Edit, AlertCircle } from "lucide-react";
+import { toast } from "sonner";
 
 export default function PatientDashboard() {
   const [, setLocation] = useLocation();
@@ -33,8 +34,38 @@ export default function PatientDashboard() {
       professional: "Dra. Vitória Nykiel",
       diagnosis: "Placa bacteriana",
       treatment: "Limpeza profissional",
+      notes: "Paciente apresentou boa resposta ao tratamento",
+    },
+    {
+      id: 2,
+      date: "2026-04-20",
+      professional: "Dr. João Silva",
+      diagnosis: "Hipertensão leve",
+      treatment: "Repouso e medicação",
+      notes: "Acompanhamento mensal recomendado",
     },
   ]);
+
+  const [payments] = useState([
+    {
+      id: 1,
+      date: "2026-05-10",
+      service: "Limpeza e Clareamento",
+      amount: "R$ 350,00",
+      status: "paid",
+    },
+    {
+      id: 2,
+      date: "2026-06-15",
+      service: "Consulta Geral",
+      amount: "R$ 150,00",
+      status: "pending",
+    },
+  ]);
+
+  const [showRescheduleModal, setShowRescheduleModal] = useState(false);
+  const [showCancelModal, setShowCancelModal] = useState(false);
+  const [selectedAppointment, setSelectedAppointment] = useState<any>(null);
 
   const handleLogout = () => {
     localStorage.removeItem("user_role");
@@ -44,6 +75,42 @@ export default function PatientDashboard() {
 
   const handleScheduleAppointment = () => {
     setLocation("/booking");
+  };
+
+  const handleReschedule = (appointment: any) => {
+    setSelectedAppointment(appointment);
+    setShowRescheduleModal(true);
+  };
+
+  const handleCancel = (appointment: any) => {
+    setSelectedAppointment(appointment);
+    setShowCancelModal(true);
+  };
+
+  const confirmReschedule = () => {
+    toast.success("Agendamento remarcado com sucesso!");
+    setShowRescheduleModal(false);
+    setAppointments(appointments.map(a => 
+      a.id === selectedAppointment.id ? { ...a, status: "rescheduled" } : a
+    ));
+  };
+
+  const confirmCancel = () => {
+    toast.success("Agendamento cancelado com sucesso!");
+    setShowCancelModal(false);
+    setAppointments(appointments.filter(a => a.id !== selectedAppointment.id));
+  };
+
+  const handleDownloadPDF = (recordId: number) => {
+    toast.success("PDF do prontuário baixado com sucesso!");
+    // Simular download
+    const element = document.createElement("a");
+    element.setAttribute("href", "data:text/plain;charset=utf-8,Prontuário Eletrônico");
+    element.setAttribute("download", `prontuario_${recordId}.pdf`);
+    element.style.display = "none";
+    document.body.appendChild(element);
+    element.click();
+    document.body.removeChild(element);
   };
 
   return (
@@ -99,104 +166,209 @@ export default function PatientDashboard() {
 
           {/* Appointments Tab */}
           <TabsContent value="appointments" className="space-y-4">
-            <div className="grid gap-4">
-              {appointments.length > 0 ? (
-                appointments.map((apt) => (
-                  <Card key={apt.id}>
-                    <CardHeader>
-                      <div className="flex items-start justify-between">
-                        <div>
-                          <CardTitle className="text-lg">{apt.service}</CardTitle>
-                          <CardDescription>{apt.professional}</CardDescription>
-                        </div>
-                        <span
-                          className={`px-3 py-1 rounded-full text-sm font-medium ${
-                            apt.status === "confirmed"
-                              ? "bg-green-100 text-green-800"
-                              : "bg-yellow-100 text-yellow-800"
-                          }`}
-                        >
-                          {apt.status === "confirmed" ? "Confirmado" : "Agendado"}
-                        </span>
+            {appointments.length === 0 ? (
+              <Card>
+                <CardContent className="pt-6 text-center">
+                  <Calendar className="w-12 h-12 text-gray-300 mx-auto mb-4" />
+                  <p className="text-gray-600">Nenhum agendamento no momento</p>
+                  <Button className="mt-4" onClick={handleScheduleAppointment}>
+                    Agendar Consulta
+                  </Button>
+                </CardContent>
+              </Card>
+            ) : (
+              appointments.map((appointment) => (
+                <Card key={appointment.id}>
+                  <CardHeader>
+                    <div className="flex items-start justify-between">
+                      <div>
+                        <CardTitle>{appointment.professional}</CardTitle>
+                        <CardDescription>{appointment.service}</CardDescription>
                       </div>
-                    </CardHeader>
-                    <CardContent>
-                      <div className="flex items-center gap-4 text-gray-600">
+                      <span className={`px-3 py-1 rounded-full text-sm font-semibold ${
+                        appointment.status === "confirmed" ? "bg-green-100 text-green-800" :
+                        appointment.status === "scheduled" ? "bg-blue-100 text-blue-800" :
+                        "bg-yellow-100 text-yellow-800"
+                      }`}>
+                        {appointment.status === "confirmed" ? "Confirmado" :
+                         appointment.status === "scheduled" ? "Agendado" : "Remarcado"}
+                      </span>
+                    </div>
+                  </CardHeader>
+                  <CardContent>
+                    <div className="flex items-center gap-4 mb-6">
+                      <div className="flex items-center gap-2 text-gray-600">
                         <Calendar className="w-4 h-4" />
-                        <span>{apt.date}</span>
+                        <span>{new Date(appointment.date).toLocaleDateString("pt-BR")}</span>
+                      </div>
+                      <div className="flex items-center gap-2 text-gray-600">
                         <Clock className="w-4 h-4" />
-                        <span>{apt.time}</span>
+                        <span>{appointment.time}</span>
                       </div>
-                      <div className="mt-4 flex gap-2">
-                        <Button variant="outline" size="sm">
-                          Remarcar
-                        </Button>
-                        <Button variant="outline" size="sm" className="text-red-600">
-                          Cancelar
-                        </Button>
-                      </div>
-                    </CardContent>
-                  </Card>
-                ))
-              ) : (
-                <Card>
-                  <CardContent className="pt-6 text-center">
-                    <p className="text-gray-600 mb-4">Você não tem agendamentos</p>
-                    <Button onClick={handleScheduleAppointment}>Agendar Agora</Button>
+                    </div>
+                    <div className="flex gap-3">
+                      <Button
+                        variant="outline"
+                        className="flex-1"
+                        onClick={() => handleReschedule(appointment)}
+                      >
+                        <Edit className="w-4 h-4 mr-2" />
+                        Remarcar
+                      </Button>
+                      <Button
+                        variant="outline"
+                        className="flex-1 text-red-600 border-red-200 hover:bg-red-50"
+                        onClick={() => handleCancel(appointment)}
+                      >
+                        <X className="w-4 h-4 mr-2" />
+                        Cancelar
+                      </Button>
+                    </div>
                   </CardContent>
                 </Card>
-              )}
-            </div>
+              ))
+            )}
           </TabsContent>
 
           {/* Medical Records Tab */}
           <TabsContent value="records" className="space-y-4">
-            <div className="grid gap-4">
-              {medicalRecords.length > 0 ? (
-                medicalRecords.map((record) => (
-                  <Card key={record.id}>
-                    <CardHeader>
-                      <CardTitle className="text-lg">{record.diagnosis}</CardTitle>
-                      <CardDescription>{record.date}</CardDescription>
-                    </CardHeader>
-                    <CardContent className="space-y-4">
+            {medicalRecords.length === 0 ? (
+              <Card>
+                <CardContent className="pt-6 text-center">
+                  <FileText className="w-12 h-12 text-gray-300 mx-auto mb-4" />
+                  <p className="text-gray-600">Nenhum registro médico no momento</p>
+                </CardContent>
+              </Card>
+            ) : (
+              medicalRecords.map((record) => (
+                <Card key={record.id}>
+                  <CardHeader>
+                    <div className="flex items-start justify-between">
                       <div>
-                        <p className="text-sm font-medium text-gray-700">Profissional</p>
-                        <p className="text-gray-600">{record.professional}</p>
+                        <CardTitle>{record.professional}</CardTitle>
+                        <CardDescription>{new Date(record.date).toLocaleDateString("pt-BR")}</CardDescription>
                       </div>
-                      <div>
-                        <p className="text-sm font-medium text-gray-700">Tratamento</p>
-                        <p className="text-gray-600">{record.treatment}</p>
-                      </div>
-                      <Button variant="outline" size="sm">
+                      <Button
+                        variant="outline"
+                        size="sm"
+                        onClick={() => handleDownloadPDF(record.id)}
+                      >
+                        <Download className="w-4 h-4 mr-2" />
                         Baixar PDF
                       </Button>
-                    </CardContent>
-                  </Card>
-                ))
-              ) : (
-                <Card>
-                  <CardContent className="pt-6 text-center">
-                    <p className="text-gray-600">Nenhum prontuário disponível</p>
+                    </div>
+                  </CardHeader>
+                  <CardContent className="space-y-4">
+                    <div>
+                      <p className="text-sm font-semibold text-gray-600">Diagnóstico</p>
+                      <p className="text-gray-900">{record.diagnosis}</p>
+                    </div>
+                    <div>
+                      <p className="text-sm font-semibold text-gray-600">Tratamento</p>
+                      <p className="text-gray-900">{record.treatment}</p>
+                    </div>
+                    <div>
+                      <p className="text-sm font-semibold text-gray-600">Observações</p>
+                      <p className="text-gray-900">{record.notes}</p>
+                    </div>
                   </CardContent>
                 </Card>
-              )}
-            </div>
+              ))
+            )}
           </TabsContent>
 
           {/* Payments Tab */}
           <TabsContent value="payments" className="space-y-4">
-            <Card>
-              <CardHeader>
-                <CardTitle>Histórico de Pagamentos</CardTitle>
-              </CardHeader>
-              <CardContent>
-                <p className="text-gray-600 text-center py-8">Nenhum pagamento registrado</p>
-              </CardContent>
-            </Card>
+            {payments.length === 0 ? (
+              <Card>
+                <CardContent className="pt-6 text-center">
+                  <CreditCard className="w-12 h-12 text-gray-300 mx-auto mb-4" />
+                  <p className="text-gray-600">Nenhum pagamento registrado</p>
+                </CardContent>
+              </Card>
+            ) : (
+              payments.map((payment) => (
+                <Card key={payment.id}>
+                  <CardContent className="pt-6">
+                    <div className="flex items-center justify-between">
+                      <div>
+                        <p className="font-semibold text-gray-900">{payment.service}</p>
+                        <p className="text-sm text-gray-600">{new Date(payment.date).toLocaleDateString("pt-BR")}</p>
+                      </div>
+                      <div className="text-right">
+                        <p className="font-bold text-gray-900">{payment.amount}</p>
+                        <span className={`text-sm font-semibold ${
+                          payment.status === "paid" ? "text-green-600" : "text-yellow-600"
+                        }`}>
+                          {payment.status === "paid" ? "Pago" : "Pendente"}
+                        </span>
+                      </div>
+                    </div>
+                  </CardContent>
+                </Card>
+              ))
+            )}
           </TabsContent>
         </Tabs>
       </main>
+
+      {/* Reschedule Modal */}
+      {showRescheduleModal && (
+        <div className="fixed inset-0 bg-black/50 flex items-center justify-center z-50">
+          <Card className="w-full max-w-md">
+            <CardHeader>
+              <CardTitle>Remarcar Agendamento</CardTitle>
+              <CardDescription>Escolha uma nova data e hora</CardDescription>
+            </CardHeader>
+            <CardContent className="space-y-4">
+              <div>
+                <label className="block text-sm font-medium text-gray-700 mb-2">Nova Data</label>
+                <input type="date" className="w-full border border-gray-300 rounded-lg px-3 py-2" />
+              </div>
+              <div>
+                <label className="block text-sm font-medium text-gray-700 mb-2">Novo Horário</label>
+                <input type="time" className="w-full border border-gray-300 rounded-lg px-3 py-2" />
+              </div>
+              <div className="flex gap-3">
+                <Button variant="outline" className="flex-1" onClick={() => setShowRescheduleModal(false)}>
+                  Cancelar
+                </Button>
+                <Button className="flex-1 bg-indigo-600 hover:bg-indigo-700" onClick={confirmReschedule}>
+                  Confirmar
+                </Button>
+              </div>
+            </CardContent>
+          </Card>
+        </div>
+      )}
+
+      {/* Cancel Modal */}
+      {showCancelModal && (
+        <div className="fixed inset-0 bg-black/50 flex items-center justify-center z-50">
+          <Card className="w-full max-w-md">
+            <CardHeader>
+              <div className="flex items-center gap-2">
+                <AlertCircle className="w-5 h-5 text-red-600" />
+                <CardTitle>Cancelar Agendamento</CardTitle>
+              </div>
+              <CardDescription>Tem certeza que deseja cancelar?</CardDescription>
+            </CardHeader>
+            <CardContent className="space-y-4">
+              <p className="text-gray-600">
+                Esta ação não pode ser desfeita. O agendamento será removido do sistema.
+              </p>
+              <div className="flex gap-3">
+                <Button variant="outline" className="flex-1" onClick={() => setShowCancelModal(false)}>
+                  Manter Agendamento
+                </Button>
+                <Button className="flex-1 bg-red-600 hover:bg-red-700 text-white" onClick={confirmCancel}>
+                  Cancelar Agendamento
+                </Button>
+              </div>
+            </CardContent>
+          </Card>
+        </div>
+      )}
     </div>
   );
 }
