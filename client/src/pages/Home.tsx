@@ -27,43 +27,43 @@ export default function Home() {
       icon: Smile,
       title: "Odontologia",
       description: "Limpeza, clareamento, implantes, harmonização e muito mais",
-      color: "from-blue-500/10 to-blue-600/5 border-blue-500/20",
-      iconColor: "text-blue-500",
+      color: "from-amber-500/10 to-amber-600/5 border-amber-500/20",
+      iconColor: "text-amber-600",
     },
     {
       icon: Stethoscope,
       title: "Medicina Geral",
       description: "Consultas e acompanhamento com profissionais experientes",
-      color: "from-purple-500/10 to-purple-600/5 border-purple-500/20",
-      iconColor: "text-purple-500",
+      color: "from-orange-500/10 to-orange-600/5 border-orange-500/20",
+      iconColor: "text-orange-600",
     },
     {
       icon: Apple,
       title: "Nutrição",
       description: "Planejamento nutricional personalizado",
-      color: "from-orange-500/10 to-orange-600/5 border-orange-500/20",
-      iconColor: "text-orange-500",
+      color: "from-yellow-500/10 to-yellow-600/5 border-yellow-500/20",
+      iconColor: "text-yellow-600",
     },
     {
       icon: Dumbbell,
       title: "Fisioterapia",
       description: "Reabilitação e prevenção de lesões",
-      color: "from-red-500/10 to-red-600/5 border-red-500/20",
-      iconColor: "text-red-500",
+      color: "from-rose-500/10 to-rose-600/5 border-rose-500/20",
+      iconColor: "text-rose-600",
     },
     {
       icon: Brain,
       title: "Psicologia",
       description: "Atendimento psicológico e bem-estar mental",
       color: "from-pink-500/10 to-pink-600/5 border-pink-500/20",
-      iconColor: "text-pink-500",
+      iconColor: "text-pink-600",
     },
     {
       icon: Sparkles,
       title: "Estética",
       description: "Procedimentos estéticos avançados",
-      color: "from-amber-500/10 to-amber-600/5 border-amber-500/20",
-      iconColor: "text-amber-500",
+      color: "from-fuchsia-500/10 to-fuchsia-600/5 border-fuchsia-500/20",
+      iconColor: "text-fuchsia-600",
     },
   ];
 
@@ -77,12 +77,14 @@ export default function Home() {
   ];
 
   return (
-    <div className="min-h-screen bg-white">
+    <div className="min-h-screen" style={{ backgroundColor: "#F5F5DC" }}>
       {/* Header */}
-      <header className="sticky top-0 z-50 bg-white/80 backdrop-blur border-b border-gray-200">
+      <header className="sticky top-0 z-50 bg-white/80 backdrop-blur border-b" style={{ borderColor: "#E8E8D0" }}>
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-16 flex items-center justify-between">
           <div className="flex items-center gap-2">
-            <Stethoscope className="w-8 h-8 text-indigo-600" />
+            <div className="w-10 h-10 rounded-lg flex items-center justify-center" style={{ backgroundColor: "#D4A574" }}>
+              <Stethoscope className="w-6 h-6 text-white" />
+            </div>
             <span className="font-bold text-xl text-gray-900">Nykiel</span>
           </div>
           <nav className="hidden md:flex items-center gap-8">
@@ -98,22 +100,22 @@ export default function Home() {
             <a href="#contato" className="text-gray-600 hover:text-gray-900 transition font-medium">
               Contato
             </a>
-            <Button variant="outline" onClick={() => setLocation("/register")} className="border-gray-300 text-gray-700 hover:bg-gray-50">
+            <Button variant="outline" onClick={() => setLocation("/register")} className="border-gray-300 text-gray-700 hover:bg-white">
               Cadastro
             </Button>
-            <Button onClick={() => setLocation("/login")} className="bg-indigo-600 hover:bg-indigo-700">
+            <Button onClick={() => setLocation("/login")} className="text-white" style={{ backgroundColor: "#D4A574" }}>
               Entrar
             </Button>
           </nav>
           <div className="md:hidden flex gap-2">
             <Button variant="outline" size="sm" onClick={() => setLocation("/register")}>Cadastro</Button>
-            <Button size="sm" onClick={() => setLocation("/login")}>Entrar</Button>
+            <Button size="sm" onClick={() => setLocation("/login")} style={{ backgroundColor: "#D4A574" }}>Entrar</Button>
           </div>
         </div>
       </header>
 
       {/* Hero Section */}
-      <section className="bg-gradient-to-br from-indigo-50 via-white to-blue-50 py-24 px-4">
+      <section className="py-24 px-4" style={{ backgroundColor: "#F5F5DC" }}>
         <div className="max-w-7xl mx-auto text-center">
           <h1 className="text-5xl md:text-6xl font-bold text-gray-900 mb-6 leading-tight">
             Cuidado Completo em Um Só Lugar
@@ -126,14 +128,15 @@ export default function Home() {
             <Button 
               size="lg" 
               onClick={() => setLocation("/booking")}
-              className="bg-indigo-600 hover:bg-indigo-700 text-white font-semibold px-8 py-6 text-lg rounded-lg shadow-lg hover:shadow-xl transition-all"
+              className="text-white font-semibold px-8 py-6 text-lg rounded-lg shadow-lg hover:shadow-xl transition-all"
+              style={{ backgroundColor: "#D4A574" }}
             >
               Agendar Consulta <ArrowRight className="w-5 h-5 ml-2" />
             </Button>
             <Button 
               size="lg" 
               variant="outline"
-              className="border-indigo-300 text-indigo-600 hover:bg-indigo-50 font-semibold px-8 py-6 text-lg rounded-lg"
+              className="border-gray-300 text-gray-700 hover:bg-white font-semibold px-8 py-6 text-lg rounded-lg"
             >
               Saiba Mais
             </Button>
@@ -175,7 +178,7 @@ export default function Home() {
       </section>
 
       {/* Benefícios */}
-      <section id="sobre" className="py-24 px-4 bg-gray-50">
+      <section id="sobre" className="py-24 px-4" style={{ backgroundColor: "#F5F5DC" }}>
         <div className="max-w-7xl mx-auto">
           <div className="grid md:grid-cols-2 gap-16 items-center">
             <div>
@@ -185,8 +188,8 @@ export default function Home() {
                   const Icon = benefit.icon;
                   return (
                     <div key={idx} className="flex items-start gap-4">
-                      <div className="w-10 h-10 bg-indigo-100 rounded-lg flex items-center justify-center flex-shrink-0 mt-1">
-                        <Icon className="w-5 h-5 text-indigo-600" />
+                      <div className="w-10 h-10 rounded-lg flex items-center justify-center flex-shrink-0 mt-1" style={{ backgroundColor: "#E8E8D0" }}>
+                        <Icon className="w-5 h-5" style={{ color: "#D4A574" }} />
                       </div>
                       <span className="text-gray-700 font-medium">{benefit.text}</span>
                     </div>
@@ -194,18 +197,19 @@ export default function Home() {
                 })}
               </div>
               <Button 
-                className="mt-10 bg-indigo-600 hover:bg-indigo-700 text-white font-semibold px-8 py-6 text-lg rounded-lg shadow-lg"
+                className="mt-10 text-white font-semibold px-8 py-6 text-lg rounded-lg shadow-lg"
                 onClick={() => setLocation("/booking")}
+                style={{ backgroundColor: "#D4A574" }}
               >
                 Comece Agora <ArrowRight className="w-5 h-5 ml-2" />
               </Button>
             </div>
             <div className="relative">
-              <div className="absolute inset-0 bg-gradient-to-br from-indigo-400 to-indigo-600 rounded-3xl blur-2xl opacity-20"></div>
-              <div className="relative bg-gradient-to-br from-indigo-50 to-indigo-100 rounded-3xl h-96 flex items-center justify-center border border-indigo-200">
+              <div className="absolute inset-0 rounded-3xl blur-2xl opacity-20" style={{ backgroundColor: "#D4A574" }}></div>
+              <div className="relative rounded-3xl h-96 flex items-center justify-center border" style={{ backgroundColor: "#F5F5DC", borderColor: "#E8E8D0" }}>
                 <div className="text-center">
-                  <Users className="w-24 h-24 text-indigo-300 mx-auto mb-4" />
-                  <p className="text-indigo-700 font-semibold">Equipe de Profissionais Experientes</p>
+                  <Users className="w-24 h-24 mx-auto mb-4" style={{ color: "#D4A574" }} />
+                  <p className="font-semibold" style={{ color: "#8B7355" }}>Equipe de Profissionais Experientes</p>
                 </div>
               </div>
             </div>
@@ -227,8 +231,8 @@ export default function Home() {
             {/* Localização */}
             <Card className="bg-white border-gray-200 hover:shadow-lg transition-all">
               <CardHeader className="text-center">
-                <div className="w-14 h-14 bg-indigo-100 rounded-xl flex items-center justify-center mb-4 mx-auto">
-                  <MapPin className="w-7 h-7 text-indigo-600" />
+                <div className="w-14 h-14 rounded-xl flex items-center justify-center mb-4 mx-auto" style={{ backgroundColor: "#E8E8D0" }}>
+                  <MapPin className="w-7 h-7" style={{ color: "#D4A574" }} />
                 </div>
                 <CardTitle className="text-gray-900">Localização</CardTitle>
               </CardHeader>
@@ -241,8 +245,8 @@ export default function Home() {
             {/* Telefone */}
             <Card className="bg-white border-gray-200 hover:shadow-lg transition-all">
               <CardHeader className="text-center">
-                <div className="w-14 h-14 bg-indigo-100 rounded-xl flex items-center justify-center mb-4 mx-auto">
-                  <Phone className="w-7 h-7 text-indigo-600" />
+                <div className="w-14 h-14 rounded-xl flex items-center justify-center mb-4 mx-auto" style={{ backgroundColor: "#E8E8D0" }}>
+                  <Phone className="w-7 h-7" style={{ color: "#D4A574" }} />
                 </div>
                 <CardTitle className="text-gray-900">Telefone</CardTitle>
               </CardHeader>
@@ -255,8 +259,8 @@ export default function Home() {
             {/* Horário */}
             <Card className="bg-white border-gray-200 hover:shadow-lg transition-all">
               <CardHeader className="text-center">
-                <div className="w-14 h-14 bg-indigo-100 rounded-xl flex items-center justify-center mb-4 mx-auto">
-                  <Clock className="w-7 h-7 text-indigo-600" />
+                <div className="w-14 h-14 rounded-xl flex items-center justify-center mb-4 mx-auto" style={{ backgroundColor: "#E8E8D0" }}>
+                  <Clock className="w-7 h-7" style={{ color: "#D4A574" }} />
                 </div>
                 <CardTitle className="text-gray-900">Horário</CardTitle>
               </CardHeader>
@@ -271,8 +275,9 @@ export default function Home() {
           <div className="flex justify-center">
             <Button
               size="lg"
-              className="bg-indigo-600 hover:bg-indigo-700 text-white border-0 rounded-lg px-8 py-6 text-lg font-semibold shadow-lg hover:shadow-xl transition-all"
+              className="text-white border-0 rounded-lg px-8 py-6 text-lg font-semibold shadow-lg hover:shadow-xl transition-all"
               onClick={() => window.open("https://wa.me/message/6VQQSZGALX4HP1")}
+              style={{ backgroundColor: "#D4A574" }}
             >
               Fale Conosco no WhatsApp
             </Button>
@@ -281,12 +286,14 @@ export default function Home() {
       </section>
 
       {/* Footer */}
-      <footer className="bg-gray-900 text-gray-400 py-12 px-4 border-t border-gray-800">
+      <footer className="bg-gray-900 text-gray-400 py-12 px-4 border-t" style={{ borderColor: "#3F3F3F" }}>
         <div className="max-w-7xl mx-auto">
           <div className="grid md:grid-cols-4 gap-8 mb-8">
             <div>
               <div className="flex items-center gap-2 mb-4">
-                <Stethoscope className="w-6 h-6 text-indigo-400" />
+                <div className="w-8 h-8 rounded-lg flex items-center justify-center" style={{ backgroundColor: "#D4A574" }}>
+                  <Stethoscope className="w-5 h-5 text-white" />
+                </div>
                 <span className="font-bold text-white">Nykiel</span>
               </div>
               <p className="text-sm text-gray-500">Cuidado completo em um só lugar</p>
@@ -294,22 +301,22 @@ export default function Home() {
             <div>
               <p className="font-semibold text-white mb-4 text-sm">SERVIÇOS</p>
               <ul className="space-y-2 text-sm">
-                <li><a href="#especialidades" className="text-gray-400 hover:text-indigo-400 transition">Especialidades</a></li>
-                <li><a href="#sobre" className="text-gray-400 hover:text-indigo-400 transition">Sobre Nós</a></li>
-                <li><a href="#contato" className="text-gray-400 hover:text-indigo-400 transition">Contato</a></li>
+                <li><a href="#especialidades" className="text-gray-400 hover:text-gray-300 transition">Especialidades</a></li>
+                <li><a href="#sobre" className="text-gray-400 hover:text-gray-300 transition">Sobre Nós</a></li>
+                <li><a href="#contato" className="text-gray-400 hover:text-gray-300 transition">Contato</a></li>
               </ul>
             </div>
             <div>
               <p className="font-semibold text-white mb-4 text-sm">LEGAL</p>
               <ul className="space-y-2 text-sm">
-                <li><a href="#" className="text-gray-400 hover:text-indigo-400 transition">Privacidade</a></li>
-                <li><a href="#" className="text-gray-400 hover:text-indigo-400 transition">Termos</a></li>
+                <li><a href="#" className="text-gray-400 hover:text-gray-300 transition">Privacidade</a></li>
+                <li><a href="#" className="text-gray-400 hover:text-gray-300 transition">Termos</a></li>
               </ul>
             </div>
             <div>
               <p className="font-semibold text-white mb-4 text-sm">REDES SOCIAIS</p>
               <div className="flex gap-3">
-                <a href="https://wa.me/message/6VQQSZGALX4HP1" className="w-10 h-10 bg-gray-800 rounded-lg flex items-center justify-center text-gray-400 hover:bg-indigo-600 hover:text-white transition">
+                <a href="https://wa.me/message/6VQQSZGALX4HP1" className="w-10 h-10 bg-gray-800 rounded-lg flex items-center justify-center text-gray-400 hover:text-white transition" style={{ backgroundColor: "#D4A574" }}>
                   <svg className="w-5 h-5" fill="currentColor" viewBox="0 0 24 24">
                     <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.272-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.67-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.076 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421-7.403h-.004a9.87 9.87 0 00-4.946 1.227l-.356.214-3.71-.973.992 3.63-.235.374a9.86 9.86 0 001.51 5.394c.93 1.357 2.165 2.386 3.612 3.01 1.487.625 3.078.766 4.666.348 1.588-.419 2.977-1.379 3.99-2.364 1.013-.985 1.68-2.19 1.842-3.516.162-1.326-.023-2.697-.72-3.976-.697-1.279-1.768-2.374-3.06-3.106a9.864 9.864 0 00-3.606-.867z" />
                   </svg>
