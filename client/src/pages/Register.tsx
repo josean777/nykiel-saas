@@ -12,12 +12,29 @@ export default function Register() {
   const [, setLocation] = useLocation();
   const [userType, setUserType] = useState<"patient" | "professional">("patient");
   const [loading, setLoading] = useState(false);
+  const [formData, setFormData] = useState({
+    name: "",
+    email: "",
+    password: "",
+    phone: "",
+    crm: "",
+  });
+
+  const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const { name, value } = e.target;
+    setFormData(prev => ({ ...prev, [name]: value }));
+  };
 
   const handleRegister = async (e: React.FormEvent) => {
     e.preventDefault();
     setLoading(true);
     
     try {
+      if (!formData.name || !formData.email || !formData.password) {
+        toast.error("Por favor, preencha todos os campos obrigatórios");
+        return;
+      }
+
       // Simular registro
       await new Promise(resolve => setTimeout(resolve, 1500));
       toast.success("Cadastro realizado com sucesso!");
@@ -30,230 +47,232 @@ export default function Register() {
   };
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-slate-900 via-slate-800 to-slate-900">
+    <div className="min-h-screen" style={{ backgroundColor: "#F5F5DC" }}>
       {/* Header */}
-      <header className="sticky top-0 z-50 bg-slate-900/80 backdrop-blur border-b border-slate-700">
+      <header className="sticky top-0 z-50 bg-white/95 backdrop-blur border-b" style={{ borderColor: "#E8E8D0" }}>
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-16 flex items-center justify-between">
           <button onClick={() => setLocation("/")} className="flex items-center gap-2 hover:opacity-80 transition">
-            <Stethoscope className="w-8 h-8 text-emerald-400" />
-            <span className="font-bold text-xl text-white">Nykiel</span>
+            <div className="w-8 h-8 rounded-lg flex items-center justify-center" style={{ backgroundColor: "#D4A574" }}>
+              <Stethoscope className="w-5 h-5 text-white" />
+            </div>
+            <span className="font-bold text-lg text-gray-900">Nykiel</span>
           </button>
-          <Button variant="ghost" onClick={() => setLocation("/login")} className="text-slate-300">
-            Já tem conta? Entrar
-          </Button>
+          <div className="flex items-center gap-2">
+            <span className="text-sm text-gray-600">Já tem conta?</span>
+            <Button 
+              variant="outline" 
+              onClick={() => setLocation("/login")} 
+              className="border-gray-300 text-gray-700 hover:bg-gray-50 text-sm h-9"
+            >
+              Entrar
+            </Button>
+          </div>
         </div>
       </header>
 
       {/* Main Content */}
       <div className="min-h-[calc(100vh-64px)] flex items-center justify-center px-4 py-12">
         <div className="w-full max-w-md">
-          <Card className="bg-slate-800 border-slate-700 shadow-2xl">
-            <CardHeader className="text-center">
-              <CardTitle className="text-3xl text-white">Criar Conta</CardTitle>
-              <CardDescription className="text-slate-400">
-                Escolha o tipo de cadastro que deseja fazer
+          <Card className="bg-white border border-gray-200 shadow-lg rounded-xl">
+            <CardHeader className="space-y-2 pb-4">
+              <CardTitle className="text-2xl text-gray-900">Criar Conta</CardTitle>
+              <CardDescription className="text-gray-600">
+                Escolha seu tipo de cadastro
               </CardDescription>
             </CardHeader>
 
             <CardContent>
               <Tabs value={userType} onValueChange={(value) => setUserType(value as "patient" | "professional")} className="w-full">
-                <TabsList className="grid w-full grid-cols-2 bg-slate-700">
-                  <TabsTrigger value="patient" className="data-[state=active]:bg-emerald-600">
+                <TabsList className="grid w-full grid-cols-2 mb-6 bg-gray-100">
+                  <TabsTrigger 
+                    value="patient" 
+                    className="text-sm data-[state=active]:bg-white data-[state=active]:text-gray-900"
+                    style={{ 
+                      backgroundColor: userType === "patient" ? "white" : "transparent",
+                      color: userType === "patient" ? "#D4A574" : "#666"
+                    }}
+                  >
                     Paciente
                   </TabsTrigger>
-                  <TabsTrigger value="professional" className="data-[state=active]:bg-emerald-600">
+                  <TabsTrigger 
+                    value="professional"
+                    className="text-sm data-[state=active]:bg-white data-[state=active]:text-gray-900"
+                    style={{ 
+                      backgroundColor: userType === "professional" ? "white" : "transparent",
+                      color: userType === "professional" ? "#D4A574" : "#666"
+                    }}
+                  >
                     Profissional
                   </TabsTrigger>
                 </TabsList>
 
-                {/* Patient Registration */}
-                <TabsContent value="patient" className="mt-6">
+                {/* Paciente Form */}
+                <TabsContent value="patient" className="space-y-4">
                   <form onSubmit={handleRegister} className="space-y-4">
                     <div className="space-y-2">
-                      <Label htmlFor="name" className="text-slate-300">Nome Completo</Label>
+                      <Label htmlFor="name" className="text-gray-700 font-medium">
+                        Nome Completo
+                      </Label>
                       <Input
                         id="name"
-                        placeholder="João Silva"
-                        className="bg-slate-700 border-slate-600 text-white placeholder:text-slate-500"
-                        required
+                        name="name"
+                        placeholder="Seu nome"
+                        value={formData.name}
+                        onChange={handleInputChange}
+                        className="border-gray-300 focus:border-amber-600 focus:ring-amber-600"
                       />
                     </div>
 
                     <div className="space-y-2">
-                      <Label htmlFor="cpf" className="text-slate-300">CPF</Label>
-                      <Input
-                        id="cpf"
-                        placeholder="000.000.000-00"
-                        className="bg-slate-700 border-slate-600 text-white placeholder:text-slate-500"
-                        required
-                      />
-                    </div>
-
-                    <div className="space-y-2">
-                      <Label htmlFor="email" className="text-slate-300">Email</Label>
+                      <Label htmlFor="email" className="text-gray-700 font-medium">
+                        Email
+                      </Label>
                       <Input
                         id="email"
+                        name="email"
                         type="email"
                         placeholder="seu@email.com"
-                        className="bg-slate-700 border-slate-600 text-white placeholder:text-slate-500"
-                        required
+                        value={formData.email}
+                        onChange={handleInputChange}
+                        className="border-gray-300 focus:border-amber-600 focus:ring-amber-600"
                       />
                     </div>
 
                     <div className="space-y-2">
-                      <Label htmlFor="phone" className="text-slate-300">Telefone</Label>
+                      <Label htmlFor="phone" className="text-gray-700 font-medium">
+                        Telefone
+                      </Label>
                       <Input
                         id="phone"
+                        name="phone"
                         placeholder="(75) 98238-0086"
-                        className="bg-slate-700 border-slate-600 text-white placeholder:text-slate-500"
-                        required
+                        value={formData.phone}
+                        onChange={handleInputChange}
+                        className="border-gray-300 focus:border-amber-600 focus:ring-amber-600"
                       />
                     </div>
 
                     <div className="space-y-2">
-                      <Label htmlFor="password" className="text-slate-300">Senha</Label>
+                      <Label htmlFor="password" className="text-gray-700 font-medium">
+                        Senha
+                      </Label>
                       <Input
                         id="password"
+                        name="password"
                         type="password"
                         placeholder="••••••••"
-                        className="bg-slate-700 border-slate-600 text-white placeholder:text-slate-500"
-                        required
-                      />
-                    </div>
-
-                    <div className="space-y-2">
-                      <Label htmlFor="confirm-password" className="text-slate-300">Confirmar Senha</Label>
-                      <Input
-                        id="confirm-password"
-                        type="password"
-                        placeholder="••••••••"
-                        className="bg-slate-700 border-slate-600 text-white placeholder:text-slate-500"
-                        required
+                        value={formData.password}
+                        onChange={handleInputChange}
+                        className="border-gray-300 focus:border-amber-600 focus:ring-amber-600"
                       />
                     </div>
 
                     <Button
                       type="submit"
                       disabled={loading}
-                      className="w-full bg-gradient-to-r from-emerald-500 to-emerald-600 hover:from-emerald-600 hover:to-emerald-700 text-white font-semibold py-2 rounded-lg"
+                      className="w-full text-white font-semibold py-2 h-10"
+                      style={{ backgroundColor: "#D4A574" }}
                     >
-                      {loading ? "Cadastrando..." : "Criar Conta"}
+                      {loading ? "Criando conta..." : "Criar Conta"}
                     </Button>
                   </form>
                 </TabsContent>
 
-                {/* Professional Registration */}
-                <TabsContent value="professional" className="mt-6">
+                {/* Profissional Form */}
+                <TabsContent value="professional" className="space-y-4">
                   <form onSubmit={handleRegister} className="space-y-4">
                     <div className="space-y-2">
-                      <Label htmlFor="prof-name" className="text-slate-300">Nome Completo</Label>
+                      <Label htmlFor="prof-name" className="text-gray-700 font-medium">
+                        Nome Completo
+                      </Label>
                       <Input
                         id="prof-name"
-                        placeholder="Dra. Maria Silva"
-                        className="bg-slate-700 border-slate-600 text-white placeholder:text-slate-500"
-                        required
+                        name="name"
+                        placeholder="Seu nome"
+                        value={formData.name}
+                        onChange={handleInputChange}
+                        className="border-gray-300 focus:border-amber-600 focus:ring-amber-600"
                       />
                     </div>
 
                     <div className="space-y-2">
-                      <Label htmlFor="prof-cpf" className="text-slate-300">CPF</Label>
+                      <Label htmlFor="crm" className="text-gray-700 font-medium">
+                        CRM/CRO
+                      </Label>
                       <Input
-                        id="prof-cpf"
-                        placeholder="000.000.000-00"
-                        className="bg-slate-700 border-slate-600 text-white placeholder:text-slate-500"
-                        required
+                        id="crm"
+                        name="crm"
+                        placeholder="Seu CRM ou CRO"
+                        value={formData.crm}
+                        onChange={handleInputChange}
+                        className="border-gray-300 focus:border-amber-600 focus:ring-amber-600"
                       />
                     </div>
 
                     <div className="space-y-2">
-                      <Label htmlFor="prof-crm" className="text-slate-300">CRO/CRM</Label>
-                      <Input
-                        id="prof-crm"
-                        placeholder="12345/BA"
-                        className="bg-slate-700 border-slate-600 text-white placeholder:text-slate-500"
-                        required
-                      />
-                    </div>
-
-                    <div className="space-y-2">
-                      <Label htmlFor="prof-specialty" className="text-slate-300">Especialidade</Label>
-                      <select
-                        id="prof-specialty"
-                        className="w-full bg-slate-700 border border-slate-600 text-white rounded-md px-3 py-2"
-                        required
-                      >
-                        <option value="">Selecione uma especialidade</option>
-                        <option value="odontologia">Odontologia</option>
-                        <option value="medicina">Medicina Geral</option>
-                        <option value="nutricao">Nutrição</option>
-                        <option value="fisioterapia">Fisioterapia</option>
-                        <option value="psicologia">Psicologia</option>
-                        <option value="estetica">Estética</option>
-                      </select>
-                    </div>
-
-                    <div className="space-y-2">
-                      <Label htmlFor="prof-email" className="text-slate-300">Email</Label>
+                      <Label htmlFor="prof-email" className="text-gray-700 font-medium">
+                        Email
+                      </Label>
                       <Input
                         id="prof-email"
+                        name="email"
                         type="email"
                         placeholder="seu@email.com"
-                        className="bg-slate-700 border-slate-600 text-white placeholder:text-slate-500"
-                        required
+                        value={formData.email}
+                        onChange={handleInputChange}
+                        className="border-gray-300 focus:border-amber-600 focus:ring-amber-600"
                       />
                     </div>
 
                     <div className="space-y-2">
-                      <Label htmlFor="prof-phone" className="text-slate-300">Telefone</Label>
+                      <Label htmlFor="prof-phone" className="text-gray-700 font-medium">
+                        Telefone
+                      </Label>
                       <Input
                         id="prof-phone"
+                        name="phone"
                         placeholder="(75) 98238-0086"
-                        className="bg-slate-700 border-slate-600 text-white placeholder:text-slate-500"
-                        required
+                        value={formData.phone}
+                        onChange={handleInputChange}
+                        className="border-gray-300 focus:border-amber-600 focus:ring-amber-600"
                       />
                     </div>
 
                     <div className="space-y-2">
-                      <Label htmlFor="prof-password" className="text-slate-300">Senha</Label>
+                      <Label htmlFor="prof-password" className="text-gray-700 font-medium">
+                        Senha
+                      </Label>
                       <Input
                         id="prof-password"
+                        name="password"
                         type="password"
                         placeholder="••••••••"
-                        className="bg-slate-700 border-slate-600 text-white placeholder:text-slate-500"
-                        required
+                        value={formData.password}
+                        onChange={handleInputChange}
+                        className="border-gray-300 focus:border-amber-600 focus:ring-amber-600"
                       />
                     </div>
 
                     <Button
                       type="submit"
                       disabled={loading}
-                      className="w-full bg-gradient-to-r from-emerald-500 to-emerald-600 hover:from-emerald-600 hover:to-emerald-700 text-white font-semibold py-2 rounded-lg"
+                      className="w-full text-white font-semibold py-2 h-10"
+                      style={{ backgroundColor: "#D4A574" }}
                     >
-                      {loading ? "Cadastrando..." : "Criar Conta"}
+                      {loading ? "Criando conta..." : "Criar Conta"}
                     </Button>
                   </form>
                 </TabsContent>
               </Tabs>
 
-              <div className="mt-6 text-center text-sm text-slate-400">
-                <p>
-                  Ao se cadastrar, você concorda com nossos{" "}
-                  <a href="#" className="text-emerald-400 hover:text-emerald-300">
-                    Termos de Serviço
-                  </a>
-                </p>
+              <div className="mt-6 text-center text-sm text-gray-600">
+                Ao se cadastrar, você concorda com nossos{" "}
+                <a href="#" className="text-amber-600 hover:underline">
+                  Termos de Serviço
+                </a>
               </div>
             </CardContent>
           </Card>
-
-          {/* Back to Home */}
-          <button
-            onClick={() => setLocation("/")}
-            className="mt-6 w-full flex items-center justify-center gap-2 text-slate-400 hover:text-white transition"
-          >
-            <ArrowLeft className="w-4 h-4" />
-            Voltar para Home
-          </button>
         </div>
       </div>
     </div>

@@ -201,35 +201,33 @@ export default function Home() {
                 </Button>
               </div>
             </div>
-            <div className="hidden md:block">
-              <div className="bg-white rounded-2xl p-8 md:p-12 shadow-lg border" style={{ borderColor: "#E8E8D0" }}>
-                <div className="space-y-6">
-                  <div className="flex items-start gap-4">
-                    <div className="w-12 h-12 rounded-lg flex items-center justify-center flex-shrink-0 mt-1" style={{ backgroundColor: "#E8E8D0" }}>
-                      <CheckCircle2 className="w-6 h-6" style={{ color: "#D4A574" }} />
-                    </div>
-                    <div>
-                      <h3 className="font-semibold text-gray-900">Profissionais Qualificados</h3>
-                      <p className="text-sm text-gray-600 mt-1">Experiência de 15+ anos em atendimento</p>
-                    </div>
+            <div className="bg-white rounded-2xl p-6 md:p-12 shadow-lg border" style={{ borderColor: "#E8E8D0" }}>
+              <div className="space-y-6">
+                <div className="flex items-start gap-4">
+                  <div className="w-12 h-12 rounded-lg flex items-center justify-center flex-shrink-0 mt-1" style={{ backgroundColor: "#E8E8D0" }}>
+                    <CheckCircle2 className="w-6 h-6" style={{ color: "#D4A574" }} />
                   </div>
-                  <div className="flex items-start gap-4">
-                    <div className="w-12 h-12 rounded-lg flex items-center justify-center flex-shrink-0 mt-1" style={{ backgroundColor: "#E8E8D0" }}>
-                      <CheckCircle2 className="w-6 h-6" style={{ color: "#D4A574" }} />
-                    </div>
-                    <div>
-                      <h3 className="font-semibold text-gray-900">Tecnologia Moderna</h3>
-                      <p className="text-sm text-gray-600 mt-1">Equipamentos e sistemas de ponta</p>
-                    </div>
+                  <div>
+                    <h3 className="font-semibold text-gray-900">Profissionais Qualificados</h3>
+                    <p className="text-sm text-gray-600 mt-1">Experiência de 15+ anos em atendimento</p>
                   </div>
-                  <div className="flex items-start gap-4">
-                    <div className="w-12 h-12 rounded-lg flex items-center justify-center flex-shrink-0 mt-1" style={{ backgroundColor: "#E8E8D0" }}>
-                      <CheckCircle2 className="w-6 h-6" style={{ color: "#D4A574" }} />
-                    </div>
-                    <div>
-                      <h3 className="font-semibold text-gray-900">Atendimento Humanizado</h3>
-                      <p className="text-sm text-gray-600 mt-1">Cuidado com empatia e dedicação</p>
-                    </div>
+                </div>
+                <div className="flex items-start gap-4">
+                  <div className="w-12 h-12 rounded-lg flex items-center justify-center flex-shrink-0 mt-1" style={{ backgroundColor: "#E8E8D0" }}>
+                    <CheckCircle2 className="w-6 h-6" style={{ color: "#D4A574" }} />
+                  </div>
+                  <div>
+                    <h3 className="font-semibold text-gray-900">Tecnologia Moderna</h3>
+                    <p className="text-sm text-gray-600 mt-1">Equipamentos e sistemas de ponta</p>
+                  </div>
+                </div>
+                <div className="flex items-start gap-4">
+                  <div className="w-12 h-12 rounded-lg flex items-center justify-center flex-shrink-0 mt-1" style={{ backgroundColor: "#E8E8D0" }}>
+                    <CheckCircle2 className="w-6 h-6" style={{ color: "#D4A574" }} />
+                  </div>
+                  <div>
+                    <h3 className="font-semibold text-gray-900">Atendimento Humanizado</h3>
+                    <p className="text-sm text-gray-600 mt-1">Cuidado com empatia e dedicação</p>
                   </div>
                 </div>
               </div>
