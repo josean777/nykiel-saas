@@ -9,43 +9,43 @@
 - [ ] Executar migrations do Drizzle
 
 ## Fase 2: Autenticação Multiperfil
-- [ ] Implementar autenticação OAuth Manus
-- [ ] Criar fluxo de login/registro para pacientes
-- [ ] Criar fluxo de login/registro para profissionais
-- [ ] Criar fluxo de login/registro para admin
-- [ ] Implementar proteção de rotas por role
-- [ ] Criar página de login
-- [ ] Criar página de registro
+- [x] Implementar autenticação OAuth Manus
+- [x] Criar fluxo de login/registro para pacientes
+- [x] Criar fluxo de login/registro para profissionais
+- [x] Criar fluxo de login/registro para admin
+- [x] Implementar proteção de rotas por role
+- [x] Criar página de login
+- [x] Criar página de registro
 
 ## Fase 3: Módulo de Agendamento
-- [ ] Criar página de listagem de profissionais
-- [ ] Criar página de agendamento de consultas
-- [ ] Implementar visualização de disponibilidade
-- [ ] Implementar confirmação de agendamento
-- [ ] Implementar cancelamento/remarcação
+- [x] Criar página de listagem de profissionais
+- [x] Criar página de agendamento de consultas
+- [x] Implementar visualização de disponibilidade
+- [x] Implementar confirmação de agendamento
+- [x] Implementar cancelamento/remarcação
 - [ ] Integrar notificações de agendamento (WhatsApp/Email)
 
 ## Fase 4: Prontuário Eletrônico
-- [ ] Criar página de histórico de atendimentos
+- [x] Criar página de histórico de atendimentos
 - [ ] Criar formulário de anotações por profissional
 - [ ] Implementar upload de documentos
 - [ ] Criar visualização de evolução do paciente
 - [ ] Implementar controle de acesso ao prontuário
 
 ## Fase 5: Painel Administrativo
-- [ ] Criar dashboard admin
-- [ ] Implementar gestão de profissionais
-- [ ] Implementar gestão de pacientes
-- [ ] Implementar gestão de agendamentos
-- [ ] Criar relatórios de faturamento
-- [ ] Implementar gestão de comissões
+- [x] Criar dashboard admin
+- [x] Implementar gestão de profissionais
+- [x] Implementar gestão de pacientes
+- [x] Implementar gestão de agendamentos
+- [x] Criar relatórios de faturamento
+- [x] Implementar gestão de comissões
 
 ## Fase 6: Site Institucional
-- [ ] Criar página home com especialidades
+- [x] Criar página home com especialidades
 - [ ] Criar página de equipe com CRO/CRM
 - [ ] Criar página de localização
 - [ ] Criar blog para SEO
-- [ ] Integrar WhatsApp para agendamentos
+- [x] Integrar WhatsApp para agendamentos
 
 ## Fase 7: Notificações Automáticas
 - [ ] Implementar lembretes de consulta (WhatsApp)
