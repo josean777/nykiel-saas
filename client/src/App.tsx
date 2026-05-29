@@ -1,44 +1,39 @@
-import { Toaster } from "@/components/ui/sonner";
+import { Route, Router } from "wouter";
+import { Toaster } from "sonner";
 import { TooltipProvider } from "@/components/ui/tooltip";
-import NotFound from "@/pages/NotFound";
-import { Route, Switch } from "wouter";
 import ErrorBoundary from "./components/ErrorBoundary";
 import { ThemeProvider } from "./contexts/ThemeContext";
 import Home from "./pages/Home";
-import Gallery from "./pages/Gallery";
-import Blog from "./pages/Blog";
-import Contact from "./pages/Contact";
-import ResultsUpload from "./pages/ResultsUpload";
+import Login from "./pages/Login";
+import Booking from "./pages/Booking";
+import PatientDashboard from "./pages/PatientDashboard";
+import ProfessionalDashboard from "./pages/ProfessionalDashboard";
+import AdminDashboard from "./pages/AdminDashboard";
+import NotFound from "./pages/NotFound";
 
-
-function Router() {
+function AppRouter() {
   return (
-    <Switch>
-      <Route path={"/ "} component={Home} />
-      <Route path={""} component={Home} />
-      <Route path={"/gallery"} component={Gallery} />
-      <Route path={"/blog"} component={Blog} />
-      <Route path={"/contact"} component={Contact} />
-      <Route path={"/upload-results"} component={ResultsUpload} />
-      <Route path={"/404"} component={NotFound} />
-      {/* Final fallback route */}
+    <>
+      <Route path="/" component={Home} />
+      <Route path="/login" component={Login} />
+      <Route path="/booking" component={Booking} />
+      <Route path="/dashboard/patient" component={PatientDashboard} />
+      <Route path="/dashboard/professional" component={ProfessionalDashboard} />
+      <Route path="/dashboard/admin" component={AdminDashboard} />
       <Route component={NotFound} />
-    </Switch>
+    </>
   );
 }
-
-// NOTE: About Theme
-// - First choose a default theme according to your design style (dark or light bg), than change color palette in index.css
-//   to keep consistent foreground/background color across components
-// - If you want to make theme switchable, pass `switchable` ThemeProvider and use `useTheme` hook
 
 function App() {
   return (
     <ErrorBoundary>
       <ThemeProvider defaultTheme="light">
         <TooltipProvider>
+          <Router>
+            <AppRouter />
+          </Router>
           <Toaster />
-          <Router />
         </TooltipProvider>
       </ThemeProvider>
     </ErrorBoundary>
